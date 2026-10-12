@@ -1,3 +1,4 @@
+<!-- HEAD -->
 # BUBT Nexus
 
 A MERN-stack platform for students and researchers to find collaborators based on shared research interests and skills.
@@ -158,3 +159,6 @@ All routes are marked **Public** above where guests can access them; everything 
 ### Profile
 ![Profile](assets/profile.png)
 ![Edit Profile](assets/edit_profile.png)
+=======
+# BUBT-Nuxus
+>>>>>>> 791ca9f87f225a7904ac5cbda45e648e47c05f2b
