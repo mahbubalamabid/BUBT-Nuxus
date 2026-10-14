@@ -23,10 +23,17 @@ connectDB();
 const app = express();
 const httpServer = createServer(app);
 
+const rawClientUrls = process.env.CLIENT_URL || "http://localhost:5173";
+const allowedOrigins = rawClientUrls
+  .split(",")
+  .map((url) => url.trim().replace(/\/+$/, ""))
+  .filter(Boolean);
+const corsOrigin = allowedOrigins.length === 1 ? allowedOrigins[0] : allowedOrigins;
+
 // Socket.io setup for real-time messaging
 const io = new Server(httpServer, {
   cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: corsOrigin,
     credentials: true,
   },
 });
@@ -48,7 +55,7 @@ io.on("connection", (socket) => {
 });
 
 // Middleware
-app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:5173" }));
+app.use(cors({ origin: corsOrigin }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 if (process.env.NODE_ENV !== "production") {
